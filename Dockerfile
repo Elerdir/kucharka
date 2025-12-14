@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ../client/package*.json ./
 RUN npm install
 
-COPY ../client/ ./
+COPY client ./
 RUN npm run build
 
 # Stage 2: Build Spring Boot backend
@@ -16,8 +16,8 @@ FROM maven:3.9.1-eclipse-temurin-17 as backend-build
 WORKDIR /app
 
 # Kopíruj backendovy pom.xml a zdrojaky
-COPY ./pom.xml ./
-COPY ./src ./src
+COPY server/pom.xml ./
+COPY server/src ./src
 
 RUN mvn clean package -DskipTests
 
